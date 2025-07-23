@@ -16,8 +16,8 @@ return new class extends Migration
             $table->string('name', 255);
             $table->text('NIM', 255);
             $table->string('image', 255);
-            $table->date('visi');
-            $table->date('misi');
+            $table->text('visi');
+            $table->text('misi');
             $table->uuid('category_id');
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
             $table->timestamps();

@@ -18,13 +18,15 @@ class UserTableSeeder extends Seeder
     {
         $role = DB::table('roles')->where('name', 'admin')->first();
 
-        DB::table('users')->insert([
-            'id' => Str::uuid(),
-            'name' => 'admin',
-            'email' => 'admin@gmail.com',
-            'password' => Hash::make('password'),
-            'role_id' => $role->id
-        ]);
+        DB::table('users')->updateOrInsert(
+            ['email' => 'admin@gmail.com'],
+            [
+                'id' => Str::uuid(),
+                'name' => 'admin',
+                'password' => Hash::make('password'),
+                'role_id' => $role->id
+            ]
+        );
     }
     //
 }

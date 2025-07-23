@@ -55,7 +55,7 @@ class CandidateController extends Controller
     
             $Candidate->save();
             return response()->json([
-                'message' => 'Berhasil menambahkan candidate',
+                'message' => 'Anda Berhasil menambahkan kandidat',
             ], 200);   
     }
 

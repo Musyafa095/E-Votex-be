@@ -5,12 +5,13 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Candidate;
+use App\Models\Vote;
 
 class VoteController extends Controller
 {
     public function updateCreateVote(Request $request) {
         $request->validate([
-            'vote' => 'required|integer',
+            'vote' => 'required|integer|max:5|min:1',
             'candidate_id' => 'required|exists:candidates,id'
         ], [
             'vote.required' => 'Vote wajib diisi',
@@ -25,23 +26,15 @@ class VoteController extends Controller
                 'message' => 'User tidak terautentikasi'
             ], 401);
         }
-
-        $candidate = Candidate::find($request->input('candidate_id'));
-        if (!$candidate) {
-            return response()->json([
-                'message' => 'Candidate tidak ditemukan'
-            ], 404);
-        }
-    
         try {
-            $candidate = Candidate::updateOrCreate(
-                ['user_id' => $user->id, 'candidate_id' => $candidate->id],
+            $vote = Vote::updateOrCreate(
+                ['user_id' => $user->id, 'candidate_id' => $request->input('candidate_id')],
                 ['vote' => $request->input('vote')]
             );
     
             return response()->json([
                 'message' => 'Vote berhasil dibuat/diupdate',
-                'data' => $candidate,
+                'data' => $vote,
             ], 201);
         } catch (\Exception $e) {
             return response()->json([

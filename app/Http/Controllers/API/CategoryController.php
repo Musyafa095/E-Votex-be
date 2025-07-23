@@ -38,7 +38,7 @@ class CategoryController extends Controller
 
     {
        
-        $category = Category::with('news')->find($id);
+        $category = Category::with('candidate')->find($id);
         
         return response()->json([
             'message' => 'Detail untuk data Category',

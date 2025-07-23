@@ -11,7 +11,7 @@ use Illuminate\Support\Str;
 class Candidate extends Model
 {
     use HasFactory, HasUuids;
-    protected $table = 'candidate';
+    protected $table = 'candidates';
     protected $fillable = ['name', 'NIM', 'visi', 'misi', 'image' , 'category_id', ];
 
    public function category()
@@ -20,7 +20,7 @@ class Candidate extends Model
     }
     public function vote()
     {
-        return $this->hasMany(Vote::class, 'news_id');
+        return $this->hasMany(Vote::class, 'candidate_id');
     }
 
 }

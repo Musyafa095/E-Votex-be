@@ -18,7 +18,7 @@ class ProfileController extends Controller
         $request->validate([
             'bio' => 'required|string',
             'age' => 'required|integer',
-            'image' => 'nullable|image|mimes:jpg,png,jpeg,gif,svg|max:2048', // Gambar opsional
+            'image' => 'nullable|image|mimes:jpg,png,jpeg,gif,svg|max:2048', // Gambar opsional aja 
         ], [
             'required' => 'Inputan :attribute wajib diisi',
             'integer' => 'Inputan :attribute harus berupa angka',
@@ -46,7 +46,7 @@ class ProfileController extends Controller
             // Cek jika ada file yang diunggah
             if ($request->hasFile('image')) {
                 $uploadedFileUrl = cloudinary()->upload($request->file('image')->getRealPath(), [
-                    'folder' => 'image',
+                    'folder' => 'image'
                 ])->getSecurePath();
         
                 $data['image'] = $uploadedFileUrl; // Simpan URL gambar

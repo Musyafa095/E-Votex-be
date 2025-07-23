@@ -66,11 +66,11 @@ class AuthController extends Controller
             $query->select('user_id', 'age', 'bio', 'image');
         }, 'role'=> function($query){
             $query->select('id','name');
-        },  'comments' => function($query) {
-            $query->select('id', 'user_id', 'news_id', 'comment', 'created_at');
+        },  'vote' => function($query) {
+            $query->select('id', 'user_id', 'candidate_id', 'vote', 'created_at');
         },
-        'comments.news' => function($query) {
-            $query->select('id', 'title', 'content');
+        'vote.candidate' => function($query) {
+            $query->select('id', 'name', 'visi', 'misi');
         }])->first();
 
         return response()->json([
@@ -90,11 +90,11 @@ class AuthController extends Controller
                 $query->select('user_id', 'age', 'bio', 'image');
             }, 'role'=> function($query){
                 $query->select('id','name');
-            },  'comments' => function($query) {
-                $query->select('id', 'user_id', 'news_id', 'comment', 'created_at');
+            },  'vote' => function($query) {
+                $query->select('id', 'user_id', 'candidate_id', 'vote', 'created_at');
             },
-            'comments.news' => function($query) {
-                $query->select('id', 'title', 'content');
+            'vote.news' => function($query) {
+                $query->select('id', 'name', 'visi', 'misi' );
             }])->find($user->id);
         return response()->json([
             'user' => $userData

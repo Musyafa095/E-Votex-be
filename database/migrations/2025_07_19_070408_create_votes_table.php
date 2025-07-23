@@ -15,8 +15,8 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->integer('vote');
             $table->uuid('candidate_id');
-            $table->uuid('user_id');
             $table->foreign('candidate_id')->references('id')->on('candidates')->onDelete('cascade');
+            $table->uuid('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('comments');
+        Schema::dropIfExists('votess');
     }
 };
